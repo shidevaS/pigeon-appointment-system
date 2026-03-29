@@ -89,6 +89,7 @@ class PigeonDatabase:
         d['slot_override_requested'] = bool(d.get('slot_override_requested', 0))
         # Normalize keys
         d['IOG'] = d.pop('iog', '')
+        d['ISA'] = d.pop('isa', '')
         return d
 
     def create_appointment(self, appt: Dict[str, Any]) -> bool:
