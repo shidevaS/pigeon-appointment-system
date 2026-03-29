@@ -53,16 +53,16 @@ if 'activity_log' not in st.session_state:
 # --- AUTH ---
 class AuthSystem:
     USERS = {
-        'admin':     {'password': 'admin123',  'role': 'admin',  'name': 'SIMS Admin',  'email': 'admin@company.com'},
-        'rk':        {'password': 'vendor123', 'role': 'seller', 'vendor_name': 'RK',              'vendor_id': 109,     'email': 'rk@vendor.com'},
-        'kkoc':      {'password': 'vendor123', 'role': 'seller', 'vendor_name': 'KKOC',            'vendor_id': 104,     'email': 'kkoc@vendor.com'},
-        'etrade':    {'password': 'vendor123', 'role': 'seller', 'vendor_name': 'Etrade',          'vendor_id': 107,     'email': 'etrade@vendor.com'},
-        'cocoblu':   {'password': 'vendor123', 'role': 'seller', 'vendor_name': 'CoCoblu',         'vendor_id': 108,     'email': 'cocoblu@vendor.com'},
-        'retailez':  {'password': 'vendor123', 'role': 'seller', 'vendor_name': 'Retail_Ez',       'vendor_id': 113,     'email': 'retailez@vendor.com'},
-        'clicktech': {'password': 'vendor123', 'role': 'seller', 'vendor_name': 'Clicktech_RFul1', 'vendor_id': 7870951, 'email': 'clicktech@vendor.com'},
-        'ohl':       {'password': 'vendor123', 'role': 'seller', 'vendor_name': 'OHL',             'vendor_id': 110,     'email': 'ohl@vendor.com'},
-        'ibsc':      {'password': 'ibsc123',   'role': 'ibsc',   'name': 'IBSC Team', 'team': 'Inbound Supply Chain',      'email': 'ibsc@company.com'},
-        'noc':       {'password': 'noc123',    'role': 'noc',    'name': 'NOC Team',  'team': 'Network Operations Center', 'email': 'noc@company.com'},
+        'admin':     {'password': 'Admin@SIMS2026!',      'role': 'admin',  'name': 'SIMS Admin',  'email': 'admin@company.com'},
+        'rk':        {'password': 'RK#Vendor2026$',       'role': 'seller', 'vendor_name': 'RK',              'vendor_id': 109,     'email': 'rk@vendor.com'},
+        'kkoc':      {'password': 'KKOC@Secure2026!',     'role': 'seller', 'vendor_name': 'KKOC',            'vendor_id': 104,     'email': 'kkoc@vendor.com'},
+        'etrade':    {'password': 'Etrade#Pass2026$',     'role': 'seller', 'vendor_name': 'Etrade',          'vendor_id': 107,     'email': 'etrade@vendor.com'},
+        'cocoblu':   {'password': 'CoCoblu@2026!Secure',  'role': 'seller', 'vendor_name': 'CoCoblu',         'vendor_id': 108,     'email': 'cocoblu@vendor.com'},
+        'retailez':  {'password': 'RetailEz#2026$Pass',   'role': 'seller', 'vendor_name': 'Retail_Ez',       'vendor_id': 113,     'email': 'retailez@vendor.com'},
+        'clicktech': {'password': 'ClickTech@Secure26!',  'role': 'seller', 'vendor_name': 'Clicktech_RFul1', 'vendor_id': 7870951, 'email': 'clicktech@vendor.com'},
+        'ohl':       {'password': 'OHL#Vendor2026$',      'role': 'seller', 'vendor_name': 'OHL',             'vendor_id': 110,     'email': 'ohl@vendor.com'},
+        'ibsc':      {'password': 'IBSC@Team2026!Secure', 'role': 'ibsc',   'name': 'IBSC Team', 'team': 'Inbound Supply Chain',      'email': 'ibsc@company.com'},
+        'noc':       {'password': 'NOC#Operations2026$',  'role': 'noc',    'name': 'NOC Team',  'team': 'Network Operations Center', 'email': 'noc@company.com'},
     }
 
     @staticmethod

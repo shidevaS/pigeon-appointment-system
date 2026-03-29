@@ -1,15 +1,15 @@
-# 🦅 EAGLE — P3P Interaction Gateway to Engage Online
+# 🕊️ PIGEON — P3P Interaction Gateway to Engage Online
 
 Category Appointment Management portal for P3P sellers, IBSC, and NOC teams.
 
 ## 🚀 Live Demo
 
-[Access EAGLE on Streamlit Cloud](https://your-app-url.streamlit.app) _(Update after deployment)_
+[Access PIGEON on Streamlit Cloud](https://pigeon-sims.streamlit.app)
 
 ## 🛠️ Local Setup
 
 ```bash
-cd eagle_app
+cd pigeon_app
 pip install -r requirements.txt
 streamlit run app.py
 ```
@@ -23,21 +23,35 @@ streamlit run app.py
 5. Select your repository, branch (`main`), and main file path (`app.py`)
 6. Click "Deploy"
 
-## Credentials
+## 🔐 Login Credentials
 
-| Role   | Username    | Password   |
-|--------|-------------|------------|
-| Admin  | admin       | admin123   |
-| Seller | rk / kkoc / etrade / cocoblu / retailez / clicktech / ohl | vendor123 |
-| IBSC   | ibsc        | ibsc123    |
-| NOC    | noc         | noc123     |
+**Admin:**
+- Username: `admin`
+- Password: `Admin@SIMS2026!`
+
+**Sellers:**
+- Username: `rk` | Password: `RK#Vendor2026$`
+- Username: `kkoc` | Password: `KKOC@Secure2026!`
+- Username: `etrade` | Password: `Etrade#Pass2026$`
+- Username: `cocoblu` | Password: `CoCoblu@2026!Secure`
+- Username: `retailez` | Password: `RetailEz#2026$Pass`
+- Username: `clicktech` | Password: `ClickTech@Secure26!`
+- Username: `ohl` | Password: `OHL#Vendor2026$`
+
+**IBSC Team:**
+- Username: `ibsc`
+- Password: `IBSC@Team2026!Secure`
+
+**NOC Team:**
+- Username: `noc`
+- Password: `NOC#Operations2026$`
 
 ## Project Structure
 
 ```
-eagle_app/
+pigeon_app/
 ├── app.py                  # Entry point
-├── eagle_database.py       # SQLite database layer
+├── pigeon_database.py      # SQLite database layer
 ├── appointment.py          # Appointment business logic
 ├── notifications.py        # Notification & activity log helpers
 ├── requirements.txt
