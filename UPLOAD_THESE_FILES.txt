@@ -1,0 +1,98 @@
+═══════════════════════════════════════════════════════════════
+🦅 EAGLE - FIXED FOR STREAMLIT CLOUD
+═══════════════════════════════════════════════════════════════
+
+✅ DEPENDENCY ERROR IS NOW FIXED!
+
+The issue was version ranges in requirements.txt.
+I've updated it with exact versions.
+
+═══════════════════════════════════════════════════════════════
+📤 UPLOAD THESE FILES TO GITHUB
+═══════════════════════════════════════════════════════════════
+
+CORE FILES (MUST UPLOAD):
+✅ app.py
+✅ eagle_database.py (NOT pigeon_database.py!)
+✅ appointment.py
+✅ notifications.py
+✅ requirements.txt ⭐ UPDATED - USE NEW VERSION
+✅ packages.txt ⭐ UPDATED
+✅ .python-version ⭐ NEW FILE
+✅ README.md
+✅ .gitignore
+
+FOLDERS (UPLOAD ENTIRE FOLDERS):
+✅ views/ folder
+   - __init__.py
+   - seller_views.py
+   - ibsc_views.py
+   - noc_views.py
+   - admin_views.py
+   - shared_views.py
+
+✅ .streamlit/ folder
+   - config.toml
+
+DO NOT UPLOAD:
+❌ pigeon_database.py (old file)
+❌ pigeon.db (database file)
+❌ eagle.db (database file)
+❌ __pycache__/ folder
+❌ file_list.txt
+❌ STREAMLIT_CLOUD_FIX.md (optional)
+❌ UPLOAD_THESE_FILES.txt (this file)
+
+═══════════════════════════════════════════════════════════════
+🚀 DEPLOYMENT STEPS
+═══════════════════════════════════════════════════════════════
+
+STEP 1: Go to GitHub
+→ https://github.com/new
+→ Name: eagle-appointment-system
+→ Make it PUBLIC
+→ Create repository
+
+STEP 2: Upload Files
+→ Click "uploading an existing file"
+→ Drag ALL files listed above
+→ Commit changes
+
+STEP 3: Deploy on Streamlit Cloud
+→ https://share.streamlit.io
+→ Sign in with GitHub
+→ New app
+→ Select: eagle-appointment-system
+→ Branch: main
+→ Main file: app.py
+→ Deploy!
+
+═══════════════════════════════════════════════════════════════
+✅ WHAT WAS FIXED
+═══════════════════════════════════════════════════════════════
+
+OLD requirements.txt (CAUSED ERROR):
+streamlit>=1.32.0
+pandas>=2.0.0
+plotly>=5.18.0
+numpy>=1.26.0
+
+NEW requirements.txt (FIXED):
+streamlit==1.32.0
+pandas==2.0.3
+plotly==5.18.0
+numpy==1.26.4
+
+ALSO ADDED:
+- .python-version file (specifies Python 3.11)
+- Updated packages.txt
+
+═══════════════════════════════════════════════════════════════
+📖 MORE HELP
+═══════════════════════════════════════════════════════════════
+
+Read: STREAMLIT_CLOUD_FIX.md (detailed troubleshooting)
+
+═══════════════════════════════════════════════════════════════
+
+Your app will deploy successfully now! 🎉
