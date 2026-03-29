@@ -1,5 +1,11 @@
 import streamlit as st
 from datetime import datetime
+import sys
+from pathlib import Path
+
+# Add parent directory to path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from appointment import CategoryAppointment
 from notifications import add_notification, broadcast_notification
 from views.shared_views import show_all_appointments_view, show_dashboard_view

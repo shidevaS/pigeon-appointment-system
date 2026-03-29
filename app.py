@@ -1,26 +1,26 @@
 import streamlit as st
 from datetime import datetime
-from eagle_database import EagleDatabase
+from pigeon_database import PigeonDatabase
 from notifications import log_activity, add_notification
 
 # --- PAGE CONFIG ---
 st.set_page_config(
-    page_title="EAGLE - P3P Interaction Gateway",
+    page_title="PIGEON - P3P Interaction Gateway",
     layout="wide",
     initial_sidebar_state="expanded",
-    page_icon="🦅"
+    page_icon="🕊️"
 )
 
 # --- CUSTOM CSS ---
 st.markdown("""
 <style>
 .main { background-color: #f0f2f6; }
-.eagle-header {
+.pigeon-header {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white; padding: 20px; border-radius: 10px;
     margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 }
-.eagle-tagline { font-size: 14px; font-style: italic; color: #e0e0e0; margin-top: 5px; }
+.pigeon-tagline { font-size: 14px; font-style: italic; color: #e0e0e0; margin-top: 5px; }
 .appointment-card {
     background: white; padding: 20px; border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin: 10px 0;
@@ -41,7 +41,7 @@ st.markdown("""
 if 'user_session' not in st.session_state:
     st.session_state.user_session = None
 if 'db' not in st.session_state:
-    st.session_state.db = EagleDatabase()
+    st.session_state.db = PigeonDatabase()
 if 'category_appointments' not in st.session_state:
     st.session_state.category_appointments = st.session_state.db.get_all_appointments()
 if 'notifications' not in st.session_state:
@@ -94,16 +94,16 @@ class AuthSystem:
 # --- LOGIN PAGE ---
 def show_login_page():
     st.markdown("""
-    <div class="eagle-header">
-        <h1>🦅 EAGLE</h1>
+    <div class="pigeon-header">
+        <h1>🕊️ PIGEON</h1>
         <h3>P3P Interaction Gateway to Engage Online</h3>
-        <p class="eagle-tagline">AI-powered communication platform connecting P3P sellers, SIMS, and Amazon teams</p>
+        <p class="pigeon-tagline">AI-powered communication platform connecting P3P sellers, SIMS, and Amazon teams</p>
     </div>
     """, unsafe_allow_html=True)
     st.markdown("""
     <div class="info-box">
-        <strong>About EAGLE:</strong><br>
-        EAGLE eliminates communication silos and reduces manual coordination overhead by providing real-time visibility
+        <strong>About PIGEON:</strong><br>
+        PIGEON eliminates communication silos and reduces manual coordination overhead by providing real-time visibility
         across all stakeholders — empowering unified visibility and effective, faster close-looping.
     </div>
     """, unsafe_allow_html=True)
@@ -133,7 +133,7 @@ def show_login_page():
                 st.rerun()
         st.markdown("""
         <div style="text-align: center; color: #666; font-size: 12px; margin-top: 16px;">
-            <p>🦅 EAGLE — Powered by Amazon SIMS</p>
+            <p>🕊️ PIGEON — Powered by Amazon SIMS</p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -150,9 +150,9 @@ def show_main_app():
     col_h1, col_h2 = st.columns([4, 1])
     with col_h1:
         st.markdown("""
-        <div class="eagle-header">
-            <h2>🦅 EAGLE - Category Appointment Management</h2>
-            <p class="eagle-tagline">P3P Interaction Gateway | Unified visibility, effective & faster close-looping</p>
+        <div class="pigeon-header">
+            <h2>🕊️ PIGEON - Category Appointment Management</h2>
+            <p class="pigeon-tagline">P3P Interaction Gateway | Unified visibility, effective & faster close-looping</p>
         </div>
         """, unsafe_allow_html=True)
         st.caption(f"👤 {user['name']} ({user['role'].upper()}) | 🕐 {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
@@ -167,7 +167,7 @@ def show_main_app():
     # Sidebar
     st.sidebar.markdown("""
     <div style="text-align: center; padding: 10px;">
-        <h2>🦅 EAGLE</h2>
+        <h2>🕊️ PIGEON</h2>
         <p style="font-size: 12px; color: #666;">P3P Interaction Gateway</p>
     </div>
     """, unsafe_allow_html=True)

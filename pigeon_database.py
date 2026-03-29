@@ -4,7 +4,7 @@ from datetime import datetime
 from typing import Optional, List, Dict, Any
 
 
-DB_PATH = "eagle.db"
+DB_PATH = "pigeon.db"
 
 
 def _get_conn():
@@ -13,7 +13,7 @@ def _get_conn():
     return conn
 
 
-class EagleDatabase:
+class PigeonDatabase:
     def __init__(self):
         self._init_db()
 
