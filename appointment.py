@@ -8,7 +8,7 @@ from notifications import broadcast_notification, log_activity
 class CategoryAppointment:
     @staticmethod
     def create_appointment(vendor_code, vendor_name, fc, category, units, cartons,
-                           appt_date, prepone_date, lead_time, remarks, isa=None, sml_mix=None):
+                           appt_date, prepone_date, lead_time, remarks, isa=None, ape_rank=None, sml_mix=None):
         appointment = {
             'id': hashlib.md5(f"{datetime.now()}{vendor_code}{fc}".encode()).hexdigest()[:10],
             'IOG': f"IOG-{datetime.now().strftime('%Y%m%d%H%M%S')}-{np.random.randint(1000, 9999)}",
@@ -17,6 +17,7 @@ class CategoryAppointment:
             'fc': fc,
             'category': category,
             'ISA': isa if isa else '',
+            'ape_rank': ape_rank if ape_rank else '',
             'units': units,
             'cartons': cartons,
             'sml_mix': sml_mix if sml_mix else 'N/A',
@@ -43,9 +44,9 @@ class CategoryAppointment:
 
     @staticmethod
     def update_approval(appt_id, approval_type, status, approver,
-                        revised_date=None, noc_remarks=None, ibsc_team_remarks=None):
+                        revised_date=None, revised_time=None, noc_remarks=None, ibsc_team_remarks=None):
         success = st.session_state.db.update_approval(
-            appt_id, approval_type, status, approver, revised_date, noc_remarks, ibsc_team_remarks
+            appt_id, approval_type, status, approver, revised_date, revised_time, noc_remarks, ibsc_team_remarks
         )
         if success:
             for appt in st.session_state.category_appointments:

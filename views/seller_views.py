@@ -36,6 +36,7 @@ def show_create_appointment(vendor_name, vendor_id):
             ])
             category = st.selectbox("Category *", ['GL', 'PL', 'FC'])
             isa = st.text_input("ISA ID * (Numbers only)", value="", placeholder="e.g., 123456")
+            ape_rank = st.selectbox("APE Rank *", ['A+', 'A', 'B', 'C', 'D'])
         with col2:
             units = st.number_input("Units *", min_value=1, value=1000, step=100)
             cartons = st.number_input("Cartons *", min_value=1, value=50, step=10)
@@ -56,7 +57,7 @@ def show_create_appointment(vendor_name, vendor_id):
                 appointment = CategoryAppointment.create_appointment(
                     vendor_id, vendor_name, fc_node, category, units, cartons,
                     current_scheduled_date, requested_pull_date, lead_time_hr,
-                    remarks, isa.strip(), sml_mix
+                    remarks, isa.strip(), ape_rank, sml_mix
                 )
                 if appointment:
                     st.success(f"✅ Appointment created! ISA ID: {appointment['ISA']}")

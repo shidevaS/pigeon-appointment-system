@@ -28,6 +28,7 @@ class PigeonDatabase:
                     fc TEXT,
                     category TEXT,
                     isa TEXT,
+                    ape_rank TEXT,
                     units INTEGER,
                     cartons INTEGER,
                     sml_mix TEXT,
@@ -44,6 +45,7 @@ class PigeonDatabase:
                     noc_approver TEXT,
                     noc_approved_at TEXT,
                     noc_revised_date TEXT,
+                    noc_revised_time TEXT,
                     noc_remarks TEXT,
                     execution_comment TEXT,
                     slot_override_requested INTEGER DEFAULT 0,
@@ -97,13 +99,14 @@ class PigeonDatabase:
             with _get_conn() as conn:
                 conn.execute("""
                     INSERT INTO appointments (
-                        id, iog, vendor_code, vendor_name, fc, category, isa, units, cartons,
+                        id, iog, vendor_code, vendor_name, fc, category, isa, ape_rank, units, cartons,
                         sml_mix, appt_date, prepone_date, lead_time, ibsc_remarks,
                         status, ibsc_approval, noc_approval, created_at, created_by
-                    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                    ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
                 """, (
                     appt['id'], appt['IOG'], str(appt['vendor_code']), appt['vendor_name'],
-                    appt['fc'], appt['category'], appt['ISA'], appt['units'], appt['cartons'],
+                    appt['fc'], appt['category'], appt['ISA'], appt.get('ape_rank', ''),
+                    appt['units'], appt['cartons'],
                     appt.get('sml_mix', 'N/A'),
                     str(appt['appt_date']), str(appt['prepone_date']),
                     appt['lead_time'], appt.get('ibsc_remarks', ''),
@@ -139,7 +142,7 @@ class PigeonDatabase:
         return [self._row_to_appt(r) for r in rows]
 
     def update_approval(self, appt_id: str, approval_type: str, status: str, approver: str,
-                        revised_date=None, noc_remarks: str = None, ibsc_team_remarks: str = None) -> bool:
+                        revised_date=None, revised_time: str = None, noc_remarks: str = None, ibsc_team_remarks: str = None) -> bool:
         try:
             with _get_conn() as conn:
                 now = datetime.now().isoformat()
@@ -152,9 +155,11 @@ class PigeonDatabase:
                     conn.execute("""
                         UPDATE appointments SET noc_approval=?, noc_approver=?, noc_approved_at=?,
                         noc_revised_date=COALESCE(?, noc_revised_date),
+                        noc_revised_time=COALESCE(?, noc_revised_time),
                         noc_remarks=COALESCE(?, noc_remarks) WHERE id=?
                     """, (status, approver, now,
                           str(revised_date) if revised_date else None,
+                          revised_time,
                           noc_remarks, appt_id))
 
                 # Recalculate overall status
