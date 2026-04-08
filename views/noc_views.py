@@ -45,7 +45,7 @@ def show_noc_approvals(user):
                     st.write(f"**Current NOC Status:** {appt['noc_approval']}")
 
                 st.markdown("---")
-                noc_col1, noc_col2 = st.columns(2)
+                noc_col1, noc_col2, noc_col3 = st.columns(3)
                 with noc_col1:
                     revised_date = st.date_input(
                         "Revised Date (Optional)",
@@ -53,33 +53,66 @@ def show_noc_approvals(user):
                         key=f"revised_date_{appt['id']}"
                     )
                 with noc_col2:
+                    revised_time = st.text_input(
+                        "Revised Time (HH:MM) *",
+                        value="23:00",
+                        placeholder="23:00",
+                        key=f"revised_time_{appt['id']}"
+                    )
+                with noc_col3:
                     noc_remarks = st.text_area(
-                        "NOC Remarks (Optional)", placeholder="Enter scheduling notes...",
+                        "NOC Remarks *", placeholder="Enter scheduling notes (mandatory)...",
                         key=f"noc_remarks_{appt['id']}"
                     )
 
                 col_btn1, col_btn2, col_btn3, col_btn4, col_btn5 = st.columns(5)
                 with col_btn1:
                     if st.button("✅ Approve & Execute", key=f"noc_approve_{appt['id']}", type="primary"):
-                        CategoryAppointment.update_approval(
-                            appt['id'], 'NOC', 'Approved', user['name'],
-                            revised_date=revised_date if revised_date != appt['prepone_date'] else None,
-                            noc_remarks=noc_remarks or None
-                        )
-                        st.success("✅ Approved & Executed!")
-                        st.rerun()
+                        if not noc_remarks or not noc_remarks.strip():
+                            st.error("❌ NOC Remarks are mandatory!")
+                        elif not revised_time or not revised_time.strip():
+                            st.error("❌ Revised Time is mandatory!")
+                        else:
+                            # Validate time format
+                            try:
+                                time_parts = revised_time.strip().split(':')
+                                if len(time_parts) != 2:
+                                    raise ValueError("Invalid format")
+                                hour, minute = int(time_parts[0]), int(time_parts[1])
+                                if not (0 <= hour <= 23 and 0 <= minute <= 59):
+                                    raise ValueError("Invalid time")
+                                formatted_time = f"{hour:02d}:{minute:02d}"
+                            except:
+                                st.error("❌ Invalid time format! Use HH:MM (e.g., 23:00)")
+                                formatted_time = None
+                            
+                            if formatted_time:
+                                CategoryAppointment.update_approval(
+                                    appt['id'], 'NOC', 'Approved', user['name'],
+                                    revised_date=revised_date if revised_date != appt['prepone_date'] else None,
+                                    revised_time=formatted_time,
+                                    noc_remarks=noc_remarks.strip()
+                                )
+                                st.success("✅ Approved & Executed!")
+                                st.rerun()
                 with col_btn2:
                     if st.button("⏸️ On Hold", key=f"noc_hold_{appt['id']}"):
-                        CategoryAppointment.update_approval(appt['id'], 'NOC', 'On Hold', user['name'],
-                                                            noc_remarks=noc_remarks or None)
-                        st.info("⏸️ On Hold")
-                        st.rerun()
+                        if not noc_remarks or not noc_remarks.strip():
+                            st.error("❌ NOC Remarks are mandatory!")
+                        else:
+                            CategoryAppointment.update_approval(appt['id'], 'NOC', 'On Hold', user['name'],
+                                                                noc_remarks=noc_remarks.strip())
+                            st.info("⏸️ On Hold")
+                            st.rerun()
                 with col_btn3:
                     if st.button("❌ Reject", key=f"noc_reject_{appt['id']}"):
-                        CategoryAppointment.update_approval(appt['id'], 'NOC', 'Rejected', user['name'],
-                                                            noc_remarks=noc_remarks or None)
-                        st.error("❌ Rejected")
-                        st.rerun()
+                        if not noc_remarks or not noc_remarks.strip():
+                            st.error("❌ NOC Remarks are mandatory!")
+                        else:
+                            CategoryAppointment.update_approval(appt['id'], 'NOC', 'Rejected', user['name'],
+                                                                noc_remarks=noc_remarks.strip())
+                            st.error("❌ Rejected")
+                            st.rerun()
                 with col_btn4:
                     if st.button("🔄 Reset", key=f"noc_reset_{appt['id']}"):
                         CategoryAppointment.update_approval(appt['id'], 'NOC', 'Pending', user['name'])

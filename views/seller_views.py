@@ -124,8 +124,13 @@ def show_my_appointments(vendor_name):
                 with approval_col2:
                     noc_color = {'Pending': '🟡', 'Approved': '✅', 'Rejected': '❌', 'On Hold': '⏸️'}.get(appt['noc_approval'], '⚪')
                     st.write(f"**NOC Approval:** {noc_color} {appt['noc_approval']}")
-                    if appt.get('noc_revised_date'):
-                        st.info(f"📅 NOC Revised Date: {appt['noc_revised_date']}")
+                    if appt.get('noc_revised_date') and appt.get('noc_revised_time'):
+                        # Format: 2026/02/28 23:00 IST
+                        revised_date_str = str(appt['noc_revised_date']).replace('-', '/')
+                        st.info(f"📅 NOC Scheduled: {revised_date_str} {appt['noc_revised_time']} IST")
+                    elif appt.get('noc_revised_date'):
+                        revised_date_str = str(appt['noc_revised_date']).replace('-', '/')
+                        st.info(f"📅 NOC Revised Date: {revised_date_str}")
                     if appt.get('noc_remarks'):
                         st.info(f"💬 **NOC Remarks:** {appt['noc_remarks']}")
 
